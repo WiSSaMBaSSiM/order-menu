@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قوائم التجهيز</title>
+    <link rel="stylesheet" href="/pro-2.css">
+    <style>
+        * {
+            font-size: 28px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        table {
+            width: 100%;
+        }
+         tr,td,table{
+            border: 1px solid black;   
+        }  
+        td {
+          width: 50px;
+          text-align: center;
+        }
+        p {
+            text-align: center;
+        }      
+    </style>
+</head>
+<body>
+    <p class="time"></p>  
+    <table>      
+        <tbody class="tbody">
+            <tr>
+                <td>رقم القائمة</td>
+                <td>الاسم</td>
+                <td>رقم القائمة</td>
+                <td>الاسم</td>
+                <td>رقم القائمة</td>
+                <td>الاسم</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        let tbody = document.querySelector('.tbody');
+let startingNumber = prompt("Enter the starting number:");
+startingNumber = parseInt(startingNumber);
+if (!isNaN(startingNumber)) {
+
+  for (let i = 0; i < 24; i++) {
+    let newRow = document.createElement('tr');    
+    let temp = startingNumber
+
+    for (let j = 0; j < 6; j++) {
+      let newCell = document.createElement('td');
+
+      if (j % 2 === 0) { 
+        newCell.textContent = temp ;
+        temp=temp + 24
+
+      }
+      newRow.appendChild(newCell);
+    }
+    startingNumber++
+    tbody.appendChild(newRow);
+  }
+} else {
+  alert("Invalid input. Please enter a valid number.");
+}
+document.querySelector('p').innerText = getDayMonthYear()
+function getDayMonthYear() {
+    let now = new Date();
+    let dayOfWeek = getDayOfWeek(now.getDay());
+    let day = now.getDate().toString().padStart(2, '0');
+    let month = (now.getMonth() + 1).toString().padStart(2, '0'); 
+    let year = now.getFullYear();
+    return `${dayOfWeek}, ${day}/${month}/${year}`;
+  }
+  
+  function getDayOfWeek(dayIndex) {
+    const daysOfWeek = ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"];
+    return daysOfWeek[dayIndex];
+  }
+    </script>
+</body>
+</html>
